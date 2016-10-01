@@ -177,6 +177,12 @@ def main():
     # Load network
     sys.path.insert(0, os.path.join(args.caffe_root, 'python'))
     import caffe
+    if settings.caffevis_mode_gpu:
+        caffe.set_mode_gpu()
+        print 'CaffeVisApp mode (in main thread):     GPU'
+    else:
+        caffe.set_mode_cpu()
+        print 'CaffeVisApp mode (in main thread):     CPU'
     net = caffe.Classifier(
         args.deploy_proto,
         args.net_weights,
